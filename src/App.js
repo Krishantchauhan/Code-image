@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import logo from "./logo.svg";
+import "./App.css";
+import { useState } from "react";
+
+import CodeEditor from "./components/CodeEditor";
+import LanguageSelector from "./components/LanguageSel";
+import { languages } from "./components/utilities";
 
 function App() {
+  const [selectedLanguage, setLanguage] = useState(languages[0].name);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <main>
+      <header>
+        <LanguageSelector
+          languages={languages}
+          selectedLanguage={selectedLanguage}
+          setLanguage={setLanguage}
+        />
       </header>
-    </div>
+      <div className="code-editor-ref">
+        <CodeEditor language={selectedLanguage} />
+      </div>
+    </main>
   );
 }
 
